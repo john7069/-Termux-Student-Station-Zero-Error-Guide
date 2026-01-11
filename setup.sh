@@ -1,34 +1,39 @@
 #!/bin/bash
 
-# 1. Clear screen and show a welcome message
+# 1. Clear the screen for a clean start
 clear
-echo "🎓 Starting Student Study Space Setup..."
-echo "----------------------------------------"
+echo "🎓 Welcome to Student Study Space!"
+echo "-------------------------------------"
+echo "⏳ Setting up your environment..."
+echo "-------------------------------------"
 
-# 2. Update Termux
-echo "📦 Updating packages (this might take a while)..."
+# 2. Update Termux to avoid errors
 pkg update -y && pkg upgrade -y
 
-# 3. Setup Storage
-echo "📂 Connecting to phone storage..."
+# 3. Setup Storage (Popup will appear)
 termux-setup-storage
 
-# 4. Install useful tools
-echo "🛠️ Installing basic tools..."
-pkg install git python neofetch virglrenderer-android -y
+# 4. Install the necessary tools
+echo "📦 Installing Git, Python, and Graphics..."
+pkg install git python neofetch virglrenderer-android zsh wget curl -y
 
-# 5. Install Proot-Distro (For Kali Linux)
-echo "🐉 Installing Kali Linux..."
+# 5. Install Kali Linux (Proot Distro)
+echo "🐉 Installing Kali Linux (This may take time)..."
 pkg install proot-distro -y
 proot-distro install kali
 
-# 6. Customize the look (ZSH)
-echo "🎨 Making it look cool..."
-pkg install zsh -y
-# (This part automates the "Oh My Zsh" setup without asking questions)
+# 6. Install Oh-My-Zsh (The cool graphics/colors)
+echo "🎨 Installing 'Hacker' Theme..."
+# This command installs it automatically without asking questions
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-echo "----------------------------------------"
+# 7. Make Neofetch show up every time they open the app
+echo "neofetch" >> ~/.zshrc
+
+# 8. Success Message
+clear
 echo "✅ SETUP COMPLETE!"
-echo "To start Kali Linux, type: proot-distro login kali"
-echo "----------------------------------------"
+echo "-------------------------------------"
+echo "1. To use the new colors: Restart Termux"
+echo "2. To start Kali Linux: proot-distro login kali"
+echo "-------------------------------------"
